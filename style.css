@@ -107,6 +107,50 @@ select option[value="Low"] {
     color: green;
     font-weight: bold;
 }
+.show{
+    color: firebrick;
+}
+.task-detail-view {
+    border: 1px solid #dcdcdc; 
+    padding: 20px;
+    border-radius: 8px; 
+    box-shadow: 0 6px 8px royalblue; 
+    background-color: #f9f9f9; 
+    max-width: 600px; 
+    margin: 20px auto;
+    font-family: Arial, sans-serif; 
+}
+
+.task-detail-view h2 {
+    font-size: 1.5em; 
+    color:darkslategray; 
+    margin-bottom: 15px; 
+}
+
+.task-detail-view p {
+    font-size: 1em; 
+    color:black; 
+    margin-bottom: 10px; 
+}
+
+.task-detail-view button {
+    background-color:darkolivegreen; 
+    color: white; 
+    border: none; 
+    padding: 10px 20px; 
+    text-align: center; 
+    display: inline-block; 
+    font-size: 1em; 
+    margin: 5px; 
+    cursor: pointer; 
+    border-radius: 4px; 
+    transition: background-color 0.3s ease;
+}
+
+.task-detail-view button:hover {
+    background-color:#666
+}
+
 
 /* Task List Styles */
 #task-list {

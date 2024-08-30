@@ -59,9 +59,9 @@ function loadContent(view) {
                     </select>
                     <ul id="task-list"></ul>
                 `;
-                 // Add event listener for real-time search
+        // Add event listener for real-time search
         document.getElementById('search').addEventListener('input', searchTasks);
-        
+
         displayTasks(tasks);
     } else if (view === 'add-task') {
         content.innerHTML = `
@@ -99,12 +99,32 @@ function getPriorityColor(priority) {
             return 'black'; // Default color if no priority matches
     }
 }
+// Display task details
+function showTaskDetails(taskId) {
+    const task = api.getTask(taskId);
+    const content = document.getElementById('content');
+    
+    content.innerHTML = `
+        <h2 class="show">Task Details</h2>
+        <div class="task-detail-view">
+            <h3>${task.title}</h3>
+            <p><strong>Description:</strong> ${task.description}</p>
+            <p><strong>Due Date:</strong> ${task.dueDate}</p>
+            <p><strong>Priority:</strong> <span style="color: ${getPriorityColor(task.priority)};">${task.priority}</span></p>
+            <p><strong>Reminder:</strong> ${task.reminder || 'No reminder set'}</p>
+            <button onclick="editTask('${task.id}')">Edit Task</button>
+            <button onclick="deleteTask('${task.id}')">Delete Task</button>
+            <button onclick="loadContent('view-tasks')">Back to Task List</button>
+        </div>
+    `;
+}
+
 function displayTasks(tasks) {
     const taskList = document.getElementById('task-list');
     taskList.innerHTML = tasks.map(task => `
-        <li class="task-item" data-id="${task.id}" draggable="true">
+        <li class="task-item" data-id="${task.id}" onclick="showTaskDetails('${task.id}')" draggable="true">
             <div class="task-details">
-                <span><h2 style="display:inline;">Name:</h2><span> ${task.title}</span><br>
+                <span> <strong>${task.title}</strong></span><br>
                 <span>${task.description}</span><br>
                 <div style="display: flex; justify-content: space-between; margin-top: 60px;">
                     <span style="margin-left: 0;">
@@ -128,7 +148,7 @@ function displayTasks(tasks) {
 }
 
 
-
+// addtask functionality
 
 function addTask() {
     const title = document.getElementById('title').value;
@@ -232,7 +252,7 @@ function drop(event) {
 // Attach event listeners for drag and drop
 function setupDragAndDrop() {
     const taskList = document.getElementById('task-list');
-    
+
     taskList.addEventListener('dragover', allowDrop);
     taskList.addEventListener('drop', drop);
 
